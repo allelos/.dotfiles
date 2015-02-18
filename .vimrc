@@ -10,18 +10,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
+Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
+Plugin 'Kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'marcweber/vim-addon-mw-utils'
+
+"Plugin 'pangloss/vim-javascript'
 
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-Plugin 'Kien/ctrlp.vim'
-Plugin 'chriskempson/base16-vim'
 Plugin 'mattn/emmet-vim'
-"Plugin 'Raimondi/delimitMate'
 call vundle#end()
 
 " Turn filetype back on
@@ -29,12 +30,12 @@ filetype plugin indent on
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" The Looks """"""""""""""""""""""""""
-set t_Co=256
 set background=dark
+let base16colorspace=256
 colorscheme base16-monokai
 
 syntax enable
-set relativenumber
+set number
 set nowrap
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -48,7 +49,7 @@ let g:ctrlp_working_path_mode=0
 set laststatus=2
 
 " Set airline theme
-let g:airline_theme='molokai'
+let g:airline_theme='bubblegum'
 
 " Disable airline separators
 let g:airline_left_sep=''
@@ -64,15 +65,23 @@ set expandtab           " Convert all tabs to spaces
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Configure VIm """"""""""""""""""""""""""
 
+" Vim Explorer
+
 " Do not create backups
 set nobackup
-set omnifunc=syntaxcomplete#Complete
+set noswapfile
+
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Python Specific """"""""""""""""""""""""
+
 autocmd FileType python set autoindent expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python set textwidth=79
 autocmd FileType python set foldmethod=indent
+
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """""""""""""""" Javascript Specific """"""""""""""""""""""""
+"let g:javascript_enable_domhtmlcss=1
 
 " Searching configurations
 set ignorecase
@@ -81,6 +90,10 @@ set incsearch
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" Key Bindings """"""""""""""""""""""""
+
+"Use map-leader e to open vim explorer
+map <leader>e :Explore<cr>
+
 " Use to jj to escape in insert mode
 inoremap jj <ESC>
 
