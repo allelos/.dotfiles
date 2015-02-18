@@ -3,7 +3,6 @@ set nocompatible
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" Plugin Management """"""""""""""""""
-
 " Initialize Vundle
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
