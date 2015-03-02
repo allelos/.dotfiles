@@ -9,17 +9,18 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'chriskempson/base16-vim'
+Plugin 'junegunn/seoul256.vim'
+"Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'Kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'marcweber/vim-addon-mw-utils'
 
-"Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 
 Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+"Plugin 'garbas/vim-snipmate'
+"Plugin 'honza/vim-snippets'
 
 Plugin 'mattn/emmet-vim'
 call vundle#end()
@@ -29,9 +30,8 @@ filetype plugin indent on
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" The Looks """"""""""""""""""""""""""
-set background=dark
-let base16colorspace=256
-colorscheme base16-monokai
+let g:seoul256_background=256
+color seoul256
 
 syntax enable
 set number
@@ -70,13 +70,14 @@ set expandtab           " Convert all tabs to spaces
 set nobackup
 set noswapfile
 
-
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Python Specific """"""""""""""""""""""""
 
-autocmd FileType python set autoindent expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType python set textwidth=79
-autocmd FileType python set foldmethod=indent
+augroup filetype_python
+  autocmd!
+  autocmd FileType python set autoindent expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType python set textwidth=79
+augroup END
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Javascript Specific """"""""""""""""""""""""
