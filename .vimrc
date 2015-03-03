@@ -9,19 +9,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'junegunn/seoul256.vim'
-"Plugin 'chriskempson/base16-vim'
+Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'Kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'marcweber/vim-addon-mw-utils'
-
 Plugin 'pangloss/vim-javascript'
-
 Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
-"Plugin 'honza/vim-snippets'
-
 Plugin 'mattn/emmet-vim'
 call vundle#end()
 
@@ -30,8 +24,8 @@ filetype plugin indent on
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" The Looks """"""""""""""""""""""""""
-let g:seoul256_background=256
-color seoul256
+let base16colorspace=256
+colorscheme base16-atelierheath
 
 syntax enable
 set number
@@ -48,7 +42,7 @@ let g:ctrlp_working_path_mode=0
 set laststatus=2
 
 " Set airline theme
-let g:airline_theme='bubblegum'
+let g:airline_theme='base16'
 
 " Disable airline separators
 let g:airline_left_sep=''
