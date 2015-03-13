@@ -9,7 +9,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'chriskempson/base16-vim'
+"Plugin 'chriskempson/base16-vim'
+Plugin 'reedes/vim-colors-pencil'
 Plugin 'bling/vim-airline'
 Plugin 'Kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
@@ -24,12 +25,13 @@ filetype plugin indent on
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" The Looks """"""""""""""""""""""""""
-let base16colorspace=256
-colorscheme base16-atelierheath
+colorscheme pencil
+set background=light
 
 syntax enable
 set number
 set nowrap
+set colorcolumn=80
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """"""""""""""""" Configure CtrlP """""""""""""""""""""
@@ -42,7 +44,7 @@ let g:ctrlp_working_path_mode=0
 set laststatus=2
 
 " Set airline theme
-let g:airline_theme='base16'
+let g:airline_theme='pencil'
 
 " Disable airline separators
 let g:airline_left_sep=''
@@ -75,7 +77,6 @@ augroup END
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Javascript Specific """"""""""""""""""""""""
-"let g:javascript_enable_domhtmlcss=1
 
 " Searching configurations
 set ignorecase
