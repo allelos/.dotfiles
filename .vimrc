@@ -26,12 +26,45 @@ filetype plugin indent on
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" The Looks """"""""""""""""""""""""""
 colorscheme pencil
-set background=light
+set background=dark
 
 syntax enable
 set number
 set nowrap
-set colorcolumn=80
+
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """""""""""""""" Configure VIm """"""""""""""""""""""""""
+
+" Move between unsaved buffers faster
+set hidden
+
+" Do not create backups
+set nobackup
+set noswapfile
+
+set autoindent
+set tabstop=2           " Tabs take 4 spaces
+set shiftwidth=2        " Autoindentation depth
+set softtabstop=2
+set expandtab           " Convert all tabs to spaces
+
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """""""""""""""" Python Specific """"""""""""""""""""""""
+
+augroup filetype_python
+  autocmd!
+  autocmd FileType python set autoindent expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType python set textwidth=79
+  autocmd FileType python set colorcolumn=80
+augroup END
+
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """""""""""""""" Javascript Specific """"""""""""""""""""""""
+
+" Searching configurations
+set ignorecase
+set smartcase
+set incsearch
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """"""""""""""""" Configure CtrlP """""""""""""""""""""
@@ -51,39 +84,6 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set autoindent
-set tabstop=2           " Tabs take 4 spaces
-set shiftwidth=2        " Autoindentation depth
-set softtabstop=2
-set expandtab           " Convert all tabs to spaces
-
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """""""""""""""" Configure VIm """"""""""""""""""""""""""
-
-" Vim Explorer
-
-" Do not create backups
-set nobackup
-set noswapfile
-
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """""""""""""""" Python Specific """"""""""""""""""""""""
-
-augroup filetype_python
-  autocmd!
-  autocmd FileType python set autoindent expandtab tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd FileType python set textwidth=79
-augroup END
-
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """""""""""""""" Javascript Specific """"""""""""""""""""""""
-
-" Searching configurations
-set ignorecase
-set smartcase
-set incsearch
-
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" Key Bindings """"""""""""""""""""""""
 
 "Use map-leader e to open vim explorer
@@ -94,6 +94,8 @@ inoremap jj <ESC>
 
 " Push down and insert new line
 inoremap {<CR> {<CR>}<ESC>O
+
+inoremap ({<CR> ({<CR>});<ESC>O
 
 " Remap window movements
 nmap <C-h> <C-w>h

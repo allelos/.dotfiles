@@ -2,7 +2,7 @@
 autoload -U compinit
 autoload -U colors && colors
 
-PROMPT="%{$fg[blue]%}%n %{$reset_color%}~ "
+PROMPT="%{$fg[cyan]%}%n %{$reset_color%}~ "
 RPROMPT='%c'
 
 # no beep
@@ -17,11 +17,9 @@ setopt completeinword
 # case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# base16 shell
-# BASE16_SHELL="$HOME/.config/base16-shell/base16-atelierheath.light.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# ls configuraiton
+export LSCOLORS=cxfxcxdxbxegedabagacad
 
 #aliases
-alias ls='ls -G'
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
