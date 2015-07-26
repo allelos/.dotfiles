@@ -2,8 +2,8 @@
 autoload -U compinit
 autoload -U colors && colors
 
-PROMPT="%{$fg[cyan]%}%n %{$fg[green]%}$%{$reset_color%} " 
-RPROMPT="%{$fg[green]%}%c%{$reset_color%}"
+PROMPT="%{$fg[blue]%}%n %{$fg[red]%}$%{$reset_color%} " 
+RPROMPT="%{$fg[red]%}%c%{$reset_color%}"
 
 # no beep
 setopt NO_BEEP
