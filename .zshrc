@@ -19,7 +19,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # ls configuraiton
 export CLICOLOR=1
-export LSCOLORS=cxfxcxdxbxegedabagacad
+export LSCOLORS=fxfxcxdxbxegedabagacad
 
 # XTERM
 export TERM=xterm-256color
