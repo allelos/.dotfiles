@@ -3,47 +3,36 @@ set nocompatible
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" Plugin Management """"""""""""""""""
-" Initialize Vundle
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'bling/vim-airline'
-Plugin 'Kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'marcweber/vim-addon-mw-utils'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'tomtom/tlib_vim'
-Plugin 'mattn/emmet-vim'
+" Start Pathogen Plugin
+execute pathogen#infect()
 
-Plugin 'fatih/vim-go'
 
-Plugin 'reedes/vim-colors-pencil'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'chriskempson/base16-vim'
-call vundle#end()
-
-" Turn filetype back on
+syntax enable
 filetype plugin indent on
 
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """""""""""""""""""" The Looks """"""""""""""""""""""""""
-let base16colorspace=256
-set background=dark
-colorscheme base16-default
+" """""""""""""""""""" Configure VIm """"""""""""""""""""""
 
-"let g:hybrid_use_Xresources=1
-"colorscheme hybrid
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
-syntax enable
+colorscheme base16-default-dark
+
+highlight Comment cterm=italic
+highlight htmlArg ctermfg=magenta cterm=italic
+
+let g:jsx_ext_required = 0
+
+set mouse=a
 set number
 set nowrap
 set cursorline
-
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """""""""""""""" Configure VIm """"""""""""""""""""""""""
+set noshowmode
+set wildmenu
+set showmatch
 set clipboard=unnamed
 
 " Move between unsaved buffers faster
@@ -62,60 +51,132 @@ set expandtab           " Convert all tabs to spaces
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Python Specific """"""""""""""""""""""""
 
-augroup filetype_python
-  autocmd!
-  autocmd FileType python set autoindent expandtab tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd FileType python set textwidth=79
-  autocmd FileType python set colorcolumn=80
-augroup END
+au BufNewFile,BufRead *.py
+  \ set tabstop=4 |
+  \ set softtabstop=4 |
+  \ set shiftwidth=4 |
+  \ set textwidth=79 |
+  \ set expandtab |
+  \ set autoindent |
+  \ set fileformat=unix |
+  \ set colorcolumn=80 |
 
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" au BufWritePost *.py call Flake8()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""" Javascript Specific """"""""""""""""""""
 
-augroup filetype_javascript
-  autocmd!
-  autocmd FileType javascript set autoindent expandtab tabstop=4 softtabstop=2 shiftwidth=2
-augroup END
+au BufNewFile,BufRead *.js,*.html,*.css,*.scss
+  \ set tabstop=2 |
+  \ set softtabstop=2 |
+  \ set shiftwidth=2 |
+  \ set colorcolumn=80 |
 
 " Searching configurations
+
 set ignorecase
 set smartcase
 set incsearch
 
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """"""""""""""""" Configure CtrlP """"""""""""""""""""""
 
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" """"""""""""""""" Configure CtrlP """"""""""""""""""""""
+
+if executable('ag')
+  " Use ag in CtrlP for listing files really fast.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Ctrlp is fast with ag so no need to cache
+  let g:ctrlp_use_caching = 0
+endif
 let g:ctrlp_working_path_mode=0
 
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """"""""""""""""" Configure Airline """""""""""""""""""""
 
-" Show status line for single windows
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """"""""""""""""" Configure Ag """"""""""""""""""""""
+
+let g:ag_highlight=1
+
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """"""""""""""""" Configure Lightline """""""""""""""""""""
+
+let g:lightline = {
+  \ 'colorscheme': 'seoul256',
+  \ 'active': {
+  \ 'left': [ ['mode', 'paste'],
+  \           ['fugitive', 'filename', 'modified'] ]
+  \},
+  \ 'component_function': {
+  \   'fugitive': 'LightlineFugitive', 
+  \}
+  \}
+
+function! LightlineFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
 set laststatus=2
 
-" Set airline theme
-let g:airline_theme='base16'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""" Configure NerdTree """""""""""""""""""""
 
-" Disable airline separators
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let NERDTreeIgnore=['\.pyc$']
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=3
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""" Configure Flake8 """"""""""""""""""""""""
+
+let g:flake8_show_in_gutter=1
+
+let flake8_error_marker='•'
+let flake8_warning_marker=''
+let flake8_pyflake_marker='•'
+let flake8_complexity_marker='•'
+let flake8_naming_marker='•'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""" Configure YCM """"""""""""""""""""""""""
+
+let g:ycm_python_binary_path = 'python'
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " """""""""""""""""""" Key Bindings """"""""""""""""""""""""
 
 "Use map-leader e to open vim explorer
-map <leader>e :Explore<cr>
+map <leader>e :Explore<CR>
+map <leader>n :NERDTreeToggle<CR>
 
-" Use to jj to escape in insert mode
-inoremap jj <ESC>
+" Use to jk to escape in insert mode
+inoremap jk <ESC>
 
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {,<CR> {<CR>},<ESC>O
-inoremap (;<CR> (<CR>);<ESC>O
-inoremap ({<CR> ({<CR>});<ESC>O<ESC><UP>f(a
+"inoremap {<CR> {<CR>}<ESC>O
+"inoremap {,<CR> {<CR>},<ESC>O
+"inoremap ({<CR> ({<CR>});<ESC>O<ESC><UP>f(a
 
 " Remap window movements
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """""""""""""""""""" Goyo """"""""""""""""""""""""""""""""
+
+function! s:goyo_enter()
+  silent !tmux set status off
+  set nocursorline
+endfunction
+
+function! s:goyo_leave()
+  silent !tmux set status on
+  set cursorline
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
